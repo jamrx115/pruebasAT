@@ -1,0 +1,92 @@
+{
+	"id": "64d3e505-1621-e3e6-3f2a-b969f344ed80",
+	"name": "StartShip",
+	"description": "",
+	"order": [
+		"77ddb1ba-fa90-4205-d979-6545fa58bd4a"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1518904284981,
+	"owner": "3752543",
+	"public": false,
+	"events": [],
+	"variables": [],
+	"auth": null,
+	"requests": [
+		{
+			"id": "77ddb1ba-fa90-4205-d979-6545fa58bd4a",
+			"headers": "",
+			"headerData": [],
+			"url": "{{host}}/starships",
+			"folder": "09ddd67c-13fe-4626-8dd4-fc64f1fc27b7",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63f7cbda-de01-4708-b558-518b78c3b3c2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Estado del codigo 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var results = pm.response.json().results;",
+							"pm.environment.set(\"falcon\", results.find(x => x.name === 'Millennium Falcon').url);",
+							"pm.test(\"More than 5 startship\", function(){",
+							"    pm.expect(results).to.have.lengthOf(1);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [
+				{
+					"key": "code",
+					"value": "xWnkliVQJURqB2x1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "grant_type",
+					"value": "authorization_code",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "https://www.getpostman.com/oauth2/callback",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "abc123",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_secret",
+					"value": "ssh-secret",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"auth": null,
+			"time": 1518908096466,
+			"name": "StartShip",
+			"description": "Performing a simple `GET` request to this endpoint returns status code `401 Unauthorized` with `WWW-Authenticate` header containing information to successfully authenticate subsequent requests.\nThe `WWW-Authenticate` header must be processed to extract `realm` and `nonce` values to hash subsequent requests.\n\nWhen this request is executed within Postman, the script attached with this request does the hard work of extracting realm and nonce from the header and set it as [global variables](https://www.getpostman.com/docs/environments#global-variables?source=echo-collection-app-onboarding) named `echo_digest_nonce` and `echo_digest_realm`.\nThese variables are re-used in subsequent request for seamless integration of the two requests.",
+			"collectionId": "64d3e505-1621-e3e6-3f2a-b969f344ed80",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Estado del codigo 200\", function(){\n    pm.response.to.have.status(200);\n});\nvar results = pm.response.json().results;\npm.environment.set(\"falcon\", results.find(x => x.name === 'Millennium Falcon').url);\npm.test(\"More than 5 startship\", function(){\n    pm.expect(results).to.have.lengthOf(1);\n});\n",
+			"currentHelper": null,
+			"helperAttributes": null
+		}
+	]
+}
